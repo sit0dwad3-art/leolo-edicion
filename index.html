@@ -7,40 +7,39 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <!-- Cargar componentes comunes (nav, social bar, modal) -->
+  <!-- Componentes comunes (nav, social bar, modal) -->
   <div id="common-components"></div>
 
-  <!-- Cargar páginas -->
-  <div id="page-container">
-    <!-- Las páginas se cargarán aquí -->
-  </div>
+  <!-- Contenedor de páginas: cada página se añade aquí -->
+  <div id="page-container"></div>
 
   <script>
-    // Función para cargar HTML desde archivos externos
-    async function loadHTML(url, elementId) {
+    async function loadHTML(url, containerId, append = false) {
       try {
         const response = await fetch(url);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const html = await response.text();
-        document.getElementById(elementId).innerHTML = html;
+        const el = document.getElementById(containerId);
+        if (append) {
+          el.innerHTML += html;   // ← añade sin borrar
+        } else {
+          el.innerHTML = html;
+        }
       } catch (error) {
         console.error(`Error cargando ${url}:`, error);
       }
     }
 
-    // Cargar todos los componentes cuando la página se carga
     document.addEventListener('DOMContentLoaded', async () => {
-      // Cargar componentes comunes
+      // 1. Cargar componentes comunes
       await loadHTML('components/common.html', 'common-components');
-      
-      // Cargar todas las páginas
-      const pageContainer = document.getElementById('page-container');
-      await Promise.all([
-        loadHTML('pages/home.html', 'page-container'),
-        loadHTML('pages/events.html', 'page-container'),
-        loadHTML('pages/community.html', 'page-container')
-      ]);
-      
-      // Cargar y ejecutar el script principal
+
+      // 2. Cargar páginas en SECUENCIA (append = true para no sobreescribir)
+      await loadHTML('pages/home.html',      'page-container', true);
+      await loadHTML('pages/events.html',    'page-container', true);
+      await loadHTML('pages/community.html', 'page-container', true);
+
+      // 3. Ejecutar main.js DESPUÉS de que todo el HTML esté en el DOM
       const script = document.createElement('script');
       script.src = 'js/main.js';
       document.body.appendChild(script);
