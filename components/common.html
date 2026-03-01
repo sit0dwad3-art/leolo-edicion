@@ -1,0 +1,52 @@
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Versos Vivos</div>
+  <ul class="nav-links">
+    <li><a href="#" onclick="showPage('page1')">Inicio</a></li>
+    <li><a href="#" onclick="showPage('page2')">Eventos</a></li>
+    <li><a href="#" onclick="showPage('page3')">Comunidad</a></li>
+    <li><a href="#" onclick="openModal()" style="color:var(--gold)">Apúntate</a></li>
+  </ul>
+</nav>
+
+<!-- SOCIAL BAR -->
+<div class="social-bar">
+  <a class="social-btn" title="Instagram">📸</a>
+  <a class="social-btn" title="TikTok">🎵</a>
+  <a class="social-btn" title="Twitter/X">✖</a>
+  <a class="social-btn" title="YouTube">▶</a>
+</div>
+
+<!-- MODAL REGISTRO -->
+<div class="modal-overlay" id="registerModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <h3>Reserva tu lugar</h3>
+    <p>Únete a la próxima velada poética. Cupos limitados.</p>
+    <div class="modal-form">
+      <input type="text" placeholder="Tu nombre" />
+      <input type="email" placeholder="Tu correo electrónico" />
+      <input type="text" placeholder="Ciudad" />
+      <select style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:rgba(224,217,204,0.6);padding:12px 16px;font-family:'Inter',sans-serif;font-size:0.9rem;outline:none;">
+        <option>¿Cómo nos encontraste?</option>
+        <option>Instagram</option>
+        <option>TikTok</option>
+        <option>Amigo/a</option>
+        <option>Otro evento</option>
+      </select>
+      <button class="modal-confirm" onclick="confirmRegister()">Confirmar asistencia →</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">Versos Vivos</div>
+  <div class="f-links">
+    <a href="#">Instagram</a>
+    <a href="#">TikTok</a>
+    <a href="#">YouTube</a>
+    <a href="#">Contacto</a>
+  </div>
+  <p>© 2025 Versos Vivos · Todos los derechos reservados</p>
+</footer>

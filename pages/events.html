@@ -1,0 +1,179 @@
+<!-- ========== PAGE 2: EVENTS ========== -->
+<div id="page2" class="page">
+  <div class="events-hero">
+    <h1>Apúntate al <span>evento</span></h1>
+    <p>Elige tu próxima velada. Cada noche es única, cada lugar es especial.</p>
+  </div>
+
+  <div class="events-container">
+
+    <!-- CALENDAR -->
+    <div class="calendar-wrapper">
+      <div class="calendar-header">
+        <h3 id="calMonthTitle">Marzo 2025</h3>
+        <div class="cal-nav">
+          <button class="cal-btn" onclick="changeMonth(-1)">‹</button>
+          <button class="cal-btn" onclick="changeMonth(1)">›</button>
+        </div>
+      </div>
+      <div class="calendar-grid" id="calGrid"></div>
+    </div>
+
+    <!-- UPCOMING EVENTS -->
+    <div class="upcoming-events">
+      <h3>Próximas veladas</h3>
+
+      <div class="event-card" onclick="openModal()">
+        <div class="event-date-box">
+          <div class="day">15</div>
+          <div class="month">Mar</div>
+        </div>
+        <div class="event-info">
+          <h4>Noche de Versos — Primavera</h4>
+          <p>📍 Café Literario El Rincón · Madrid · 20:30h</p>
+          <div class="event-tags">
+            <span class="tag tag-amor">Amor</span>
+            <span class="tag tag-vida">Vida</span>
+            <span class="tag tag-noche">Noche</span>
+          </div>
+        </div>
+        <button class="btn-register">Apuntarme</button>
+      </div>
+
+      <div class="event-card" onclick="openModal()">
+        <div class="event-date-box">
+          <div class="day">28</div>
+          <div class="month">Mar</div>
+        </div>
+        <div class="event-info">
+          <h4>Palabras que Arden</h4>
+          <p>📍 Teatro La Fragua · Barcelona · 19:00h</p>
+          <div class="event-tags">
+            <span class="tag tag-tierra">Identidad</span>
+            <span class="tag tag-noche">Pasión</span>
+          </div>
+        </div>
+        <button class="btn-register">Apuntarme</button>
+      </div>
+
+      <div class="event-card" onclick="openModal()">
+        <div class="event-date-box">
+          <div class="day">12</div>
+          <div class="month">Abr</div>
+        </div>
+        <div class="event-info">
+          <h4>Silencio Habitado</h4>
+          <p>📍 Galería Nomad · Valencia · 21:00h</p>
+          <div class="event-tags">
+            <span class="tag tag-silencio">Silencio</span>
+            <span class="tag tag-vida">Introspección</span>
+          </div>
+        </div>
+        <button class="btn-register">Apuntarme</button>
+      </div>
+
+      <div class="event-card" onclick="openModal()">
+        <div class="event-date-box">
+          <div class="day">03</div>
+          <div class="month">May</div>
+        </div>
+        <div class="event-info">
+          <h4>Raíces — Edición Especial</h4>
+          <p>📍 Jardín Botánico · Sevilla · 18:30h</p>
+          <div class="event-tags">
+            <span class="tag tag-tierra">Tierra</span>
+            <span class="tag tag-amor">Memoria</span>
+          </div>
+        </div>
+        <button class="btn-register">Apuntarme</button>
+      </div>
+    </div>
+
+    <!-- ANALYTICS -->
+    <div class="analytics-section">
+      <h3>📊 Analytics de audiencia</h3>
+      <p>Datos en tiempo real sobre asistencia, intereses y comunidad</p>
+
+      <div class="analytics-grid">
+        <div class="analytics-card">
+          <div class="a-num">847</div>
+          <div class="a-label">Registros totales</div>
+          <div class="a-trend">↑ +23% este mes</div>
+        </div>
+        <div class="analytics-card">
+          <div class="a-num">94%</div>
+          <div class="a-label">Tasa de asistencia</div>
+          <div class="a-trend">↑ +5% vs anterior</div>
+        </div>
+        <div class="analytics-card">
+          <div class="a-num">4.9</div>
+          <div class="a-label">Valoración media</div>
+          <div class="a-trend">⭐ Excelente</div>
+        </div>
+        <div class="analytics-card">
+          <div class="a-num">312</div>
+          <div class="a-label">Nuevos seguidores</div>
+          <div class="a-trend">↑ Último evento</div>
+        </div>
+      </div>
+
+      <div class="charts-row">
+        <div class="chart-box">
+          <h4>Intereses por temática</h4>
+          <div class="bar-chart">
+            <div class="bar-row">
+              <span class="bar-label">Amor</span>
+              <div class="bar-track"><div class="bar-fill" style="width:82%;background:#e05a6a;"></div></div>
+              <span class="bar-val">82%</span>
+            </div>
+            <div class="bar-row">
+              <span class="bar-label">Identidad</span>
+              <div class="bar-track"><div class="bar-fill" style="width:68%;background:#c9a84c;"></div></div>
+              <span class="bar-val">68%</span>
+            </div>
+            <div class="bar-row">
+              <span class="bar-label">Vida</span>
+              <div class="bar-track"><div class="bar-fill" style="width:74%;background:#4cc9a8;"></div></div>
+              <span class="bar-val">74%</span>
+            </div>
+            <div class="bar-row">
+              <span class="bar-label">Noche</span>
+              <div class="bar-track"><div class="bar-fill" style="width:55%;background:#b87fe0;"></div></div>
+              <span class="bar-val">55%</span>
+            </div>
+            <div class="bar-row">
+              <span class="bar-label">Silencio</span>
+              <div class="bar-track"><div class="bar-fill" style="width:41%;background:#9090c0;"></div></div>
+              <span class="bar-val">41%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="chart-box">
+          <h4>Origen de la audiencia</h4>
+          <div class="donut-container">
+            <svg width="120" height="120" viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="45" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="18"/>
+              <circle cx="60" cy="60" r="45" fill="none" stroke="#c9a84c" stroke-width="18"
+                stroke-dasharray="113 170" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+              <circle cx="60" cy="60" r="45" fill="none" stroke="#4cc9a8" stroke-width="18"
+                stroke-dasharray="68 215" stroke-dashoffset="-113" transform="rotate(-90 60 60)"/>
+              <circle cx="60" cy="60" r="45" fill="none" stroke="#b87fe0" stroke-width="18"
+                stroke-dasharray="45 238" stroke-dashoffset="-181" transform="rotate(-90 60 60)"/>
+              <circle cx="60" cy="60" r="45" fill="none" stroke="#e05a6a" stroke-width="18"
+                stroke-dasharray="57 226" stroke-dashoffset="-226" transform="rotate(-90 60 60)"/>
+              <text x="60" y="64" text-anchor="middle" fill="#c9a84c" font-size="11" font-family="Playfair Display">847</text>
+            </svg>
+            <div class="donut-legend">
+              <div class="legend-item"><div class="legend-dot" style="background:#c9a84c"></div>Instagram 40%</div>
+              <div class="legend-item"><div class="legend-dot" style="background:#4cc9a8"></div>Boca a boca 24%</div>
+              <div class="legend-item"><div class="legend-dot" style="background:#b87fe0"></div>TikTok 16%</div>
+              <div class="legend-item"><div class="legend-dot" style="background:#e05a6a"></div>Otros 20%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
