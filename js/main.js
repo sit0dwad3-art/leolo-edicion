@@ -1,53 +1,97 @@
-// PAGE NAVIGATION
+/* ================================================
+   LÉOLO EDICIÓN — main.js
+   Corregido + mejorado
+================================================ */
+
+// ===== PAGE NAVIGATION =====
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  window.scrollTo(0,0);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// PARTICLES
+// ===== PARTICLES =====
 function createParticles() {
   const container = document.getElementById('particles');
+  if (!container) return;
   for (let i = 0; i < 30; i++) {
     const p = document.createElement('div');
     p.className = 'particle';
-    p.style.left = Math.random() * 100 + '%';
+    p.style.left              = Math.random() * 100 + '%';
     p.style.animationDuration = (Math.random() * 15 + 10) + 's';
-    p.style.animationDelay = (Math.random() * 10) + 's';
+    p.style.animationDelay    = (Math.random() * 10) + 's';
     p.style.width = p.style.height = (Math.random() * 3 + 1) + 'px';
     container.appendChild(p);
   }
 }
 
-// CALENDAR
-let calYear = 2025, calMonth = 2;
-const months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-const days = ['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
-const eventDays = { '2025-2': [15, 28], '2025-3': [12], '2025-4': [3] };
+// ===== CALENDAR =====
+const today    = new Date();
+let calYear  = today.getFullYear();
+let calMonth = today.getMonth(); // 0-indexed: 0=Enero … 11=Diciembre
+
+const MONTHS = [
+  'Enero','Febrero','Marzo','Abril','Mayo','Junio',
+  'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'
+];
+const DAYS = ['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
+
+// FIX: claves corregidas — 0-indexed igual que Date()
+// 0=Ene, 1=Feb, 2=Mar, 3=Abr, 4=May …
+const eventDays = {
+  '2025-2': [15, 28],   // Marzo 2025
+  '2025-3': [12],       // Abril 2025
+  '2025-4': [3]         // Mayo 2025
+};
 
 function renderCalendar() {
-  document.getElementById('calMonthTitle').textContent = months[calMonth] + ' ' + calYear;
-  const grid = document.getElementById('calGrid');
+  const titleEl = document.getElementById('calMonthTitle');
+  const grid    = document.getElementById('calGrid');
+  if (!titleEl || !grid) return;
+
+  titleEl.textContent = MONTHS[calMonth] + ' ' + calYear;
   grid.innerHTML = '';
-  days.forEach(d => {
+
+  // Cabecera días
+  DAYS.forEach(d => {
     const h = document.createElement('div');
-    h.className = 'cal-day-header'; h.textContent = d;
+    h.className   = 'cal-day-header';
+    h.textContent = d;
     grid.appendChild(h);
   });
+
+  // Offset: semana empieza en Lunes
   const firstDay = new Date(calYear, calMonth, 1).getDay();
-  const offset = firstDay === 0 ? 6 : firstDay - 1;
+  const offset   = firstDay === 0 ? 6 : firstDay - 1;
+
   const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
-  const key = calYear + '-' + calMonth;
-  const evDays = eventDays[key] || [];
+  const key         = calYear + '-' + calMonth;
+  const evDays      = eventDays[key] || [];
+
+  // Celdas vacías
   for (let i = 0; i < offset; i++) {
-    const e = document.createElement('div'); e.className = 'cal-day empty'; grid.appendChild(e);
+    const e = document.createElement('div');
+    e.className = 'cal-day empty';
+    grid.appendChild(e);
   }
+
+  // Días del mes
   for (let d = 1; d <= daysInMonth; d++) {
     const el = document.createElement('div');
-    el.className = 'cal-day';
+    el.className   = 'cal-day';
     el.textContent = d;
+
     if (evDays.includes(d)) el.classList.add('has-event');
-    if (calYear === 2025 && calMonth === 2 && d === 1) el.classList.add('today');
+
+    // FIX: today dinámico — no hardcodeado
+    if (
+      calYear  === today.getFullYear() &&
+      calMonth === today.getMonth()    &&
+      d        === today.getDate()
+    ) {
+      el.classList.add('today');
+    }
+
     el.onclick = () => { if (evDays.includes(d)) openModal(); };
     grid.appendChild(el);
   }
@@ -56,49 +100,137 @@ function renderCalendar() {
 function changeMonth(dir) {
   calMonth += dir;
   if (calMonth > 11) { calMonth = 0; calYear++; }
-  if (calMonth < 0) { calMonth = 11; calYear--; }
+  if (calMonth < 0)  { calMonth = 11; calYear--; }
   renderCalendar();
 }
 
-// MODAL
+// ===== MODAL =====
 function openModal() {
-  document.getElementById('registerModal').classList.add('open');
+  // FIX: usa .active (igual que el CSS), no .open
+  const modal = document.getElementById('registerModal');
+  if (modal) modal.classList.add('active');
 }
 
 function closeModal() {
-  document.getElementById('registerModal').classList.remove('open');
+  const modal = document.getElementById('registerModal');
+  if (modal) modal.classList.remove('active');
 }
 
 function confirmRegister() {
   closeModal();
-  alert('¡Perfecto! Tu plaza está reservada. Te llegará un correo de confirmación. ✨');
+  showToast('¡Perfecto! Tu plaza está reservada. Te llegará un correo de confirmación. ✨');
 }
 
-// EMOTION TAGS
+// ===== EMOTION TAGS =====
 function toggleEmotion(el) {
-  el.classList.toggle('selected');
+  // FIX: usa .active (igual que el CSS), no .selected
+  el.classList.toggle('active');
 }
 
-// SUBMIT COMMENT
+// ===== SUBMIT COMMENT =====
 function submitComment() {
-  alert('¡Gracias por compartir tu experiencia! Tu testimonio será revisado y publicado pronto. 🙏');
+  showToast('¡Gracias por compartir tu experiencia! Tu testimonio será revisado pronto. 🙏');
 }
 
-// Initialize on page load
-document.addEventListener('DOMContentLoaded', function() {
-  createParticles();
-  renderCalendar();
-  
-  // Modal close on overlay click
-  document.getElementById('registerModal').addEventListener('click', function(e) {
-    if (e.target === this) closeModal();
+// ===== TOAST — reemplaza alert() =====
+function showToast(msg) {
+  // Elimina toast anterior si existe
+  const old = document.getElementById('leolo-toast');
+  if (old) old.remove();
+
+  const toast = document.createElement('div');
+  toast.id = 'leolo-toast';
+  toast.textContent = msg;
+  Object.assign(toast.style, {
+    position:     'fixed',
+    bottom:       '32px',
+    left:         '50%',
+    transform:    'translateX(-50%)',
+    background:   '#2a2a2a',
+    color:        '#f7f3ec',
+    padding:      '14px 32px',
+    fontSize:     '0.82rem',
+    letterSpacing:'1px',
+    fontFamily:   "'Inter', sans-serif",
+    fontWeight:   '300',
+    zIndex:       '9999',
+    borderLeft:   '3px solid #b8965a',
+    boxShadow:    '0 8px 32px rgba(42,42,42,0.18)',
+    opacity:      '0',
+    transition:   'opacity 0.4s ease',
+    maxWidth:     '480px',
+    textAlign:    'center',
+    lineHeight:   '1.6'
   });
-  
-  // Filter tags click handling
+
+  document.body.appendChild(toast);
+  requestAnimationFrame(() => { toast.style.opacity = '1'; });
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    setTimeout(() => toast.remove(), 400);
+  }, 4000);
+}
+
+// ===== FILTER TAGS — lógica real de filtrado =====
+function initFilterTags() {
   document.querySelectorAll('.filter-tag').forEach(btn => {
-    btn.addEventListener('click', function() {
+    btn.addEventListener('click', function () {
+      // Marcar activo
       document.querySelectorAll('.filter-tag').forEach(b => b.classList.remove('active'));
       this.classList.add('active');
+
+      const filter = this.textContent.trim().toLowerCase();
+      const cards  = document.querySelectorAll('.testimonial-card');
+
+      cards.forEach(card => {
+        if (filter === 'todos') {
+          card.style.display = '';
+          return;
+        }
+        // Busca coincidencia en los tags de la card
+        const tags = Array.from(card.querySelectorAll('.tag'))
+          .map(t => t.textContent.trim().toLowerCase());
+        const match = tags.some(t => t.includes(filter));
+        card.style.display = match ? '' : 'none';
+      });
     });
   });
+}
+
+// ===== SCROLL REVEAL suave para cards =====
+function initScrollReveal() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity   = '1';
+        entry.target.style.transform = 'translateY(0)';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll(
+    '.gallery-card, .testimonial-card, .event-card, .poet-card, .analytics-card'
+  ).forEach(el => {
+    el.style.opacity    = '0';
+    el.style.transform  = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+}
+
+// ===== INIT =====
+document.addEventListener('DOMContentLoaded', function () {
+  createParticles();
+  renderCalendar();
+  initFilterTags();
+  initScrollReveal();
+
+  // Modal — cerrar al clicar el overlay
+  const modal = document.getElementById('registerModal');
+  if (modal) {
+    modal.addEventListener('click', function (e) {
+      if (e.target === this) closeModal();
+    });
+  }
 });
