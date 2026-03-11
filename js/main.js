@@ -40,60 +40,65 @@ function showPage(id) {
   });
 }
 
-// ===== CURSOR PERSONALIZADO =====
-function initCursor() {
-  if (window.innerWidth <= 768) return;
+// ── CURSOR PERSONALIZADO ─────────────────────────────────────
+const cursor     = document.getElementById('cursor-dot');
+const cursorRing = document.getElementById('cursor-ring'); // o como lo llames
 
-  // Evitar duplicados si se llama más de una vez
-  if (document.querySelector('.cursor')) return;
+// FIX CHROME: forzar cursor:none en TODOS los elementos
+const forceHideCursor = () => {
+  document.documentElement.style.cursor = 'none';
+  document.body.style.cursor = 'none';
 
-  const cursor   = document.createElement('div');
-  const follower = document.createElement('div');
-  cursor.className   = 'cursor';
-  follower.className = 'cursor-follower';
-  document.body.appendChild(cursor);
-  document.body.appendChild(follower);
-
-  let mouseX = 0, mouseY = 0;
-  let followerX = 0, followerY = 0;
-
-  document.addEventListener('mousemove', e => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    cursor.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+  // Aplicar a todos los elementos existentes
+  document.querySelectorAll('*').forEach(el => {
+    el.style.cursor = 'none';
   });
+};
 
-  function animateFollower() {
-    followerX += (mouseX - followerX) * 0.11;
-    followerY += (mouseY - followerY) * 0.11;
-    follower.style.transform = `translate(${followerX}px, ${followerY}px) translate(-50%, -50%)`;
-    requestAnimationFrame(animateFollower);
+forceHideCursor();
+
+// También aplicar a elementos que se añadan dinámicamente
+const cursorObserver = new MutationObserver(forceHideCursor);
+cursorObserver.observe(document.body, { childList: true, subtree: true });
+
+// Movimiento del cursor
+let mouseX = 0, mouseY = 0;
+let ringX  = 0, ringY  = 0;
+
+document.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+
+  // Dot sigue inmediato
+  if (cursor) {
+    cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+    cursor.style.opacity = '1';
   }
-  animateFollower();
+});
 
-  // Hover en elementos interactivos
-  function addHoverListeners() {
-    document.querySelectorAll(
-      'a, button, .event-card, .poet-card, .gallery-card, .nav-logo, .social-btn, [data-hover]'
-    ).forEach(el => {
-      if (el._cursorBound) return; // evitar duplicar listeners
-      el._cursorBound = true;
-      el.addEventListener('mouseenter', () => {
-        cursor.classList.add('hover');
-        follower.classList.add('hover');
-      });
-      el.addEventListener('mouseleave', () => {
-        cursor.classList.remove('hover');
-        follower.classList.remove('hover');
-      });
-    });
+// Ring con efecto lag (suave)
+const animateRing = () => {
+  ringX += (mouseX - ringX) * 0.12;
+  ringY += (mouseY - ringY) * 0.12;
+
+  if (cursorRing) {
+    cursorRing.style.transform = `translate(${ringX}px, ${ringY}px)`;
   }
 
-  addHoverListeners();
+  requestAnimationFrame(animateRing);
+};
+animateRing();
 
-  // Re-aplicar al cambiar de página
-  document.addEventListener('pageChanged', addHoverListeners);
-}
+// Ocultar cuando sale de la ventana
+document.addEventListener('mouseleave', () => {
+  if (cursor)     cursor.style.opacity = '0';
+  if (cursorRing) cursorRing.style.opacity = '0';
+});
+
+document.addEventListener('mouseenter', () => {
+  if (cursor)     cursor.style.opacity = '1';
+  if (cursorRing) cursorRing.style.opacity = '1';
+});
 
 // ===== NAVBAR SCROLL =====
 function initNavbar() {
