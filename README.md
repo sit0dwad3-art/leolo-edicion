@@ -93,4 +93,4 @@ Currently active in: **Pamplona, Madrid, Barcelona, Valencia, Sevilla, Bilbao, G
 
 ---
 
-*© 2025 Versos Vivos · All rights reserved*
+*© 2026 Versos Vivos · All rights reserved*

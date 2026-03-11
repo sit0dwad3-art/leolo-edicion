@@ -171,9 +171,9 @@ const MONTHS = [
 const DAYS = ['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
 
 const eventDays = {
-  '2025-2': [15, 28],
-  '2025-3': [12],
-  '2025-4': [3]
+  '2026-2': [15, 28],   // 15 y 28 Marzo 2026
+  '2026-3': [12],        // 12 Abril 2026
+  '2026-4': [3]          // 3 Mayo 2026
 };
 
 function renderCalendar() {
