@@ -1663,3 +1663,133 @@ footer {
   .btn-register { width: 100%; text-align: center; margin-top: 8px; }
   .events-container .analytics-section { padding: 32px 24px; }
 }
+/* ================================================
+   LÉOLO EDICIÓN — PATCH: Modal dinámico + EmailJS
+   Pegar al FINAL de styles.css
+   Ancla: después del bloque @media (max-width: 900px) events
+================================================ */
+
+/* ── Info dinámica del evento en el modal ──────
+   Aparece cuando el usuario hace click en "Apuntarme"
+   desde una event-card con data-* attributes.
+   Ref: https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset
+─────────────────────────────────────────────── */
+.modal-evento-meta {
+  font-size: 0.78rem;
+  color: var(--gold);
+  letter-spacing: 1.5px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  margin-bottom: 4px !important;
+  display: block;
+}
+
+/* Texto fallback: "Cupos limitados" — se oculta
+   cuando hay evento seleccionado con JS si quieres,
+   o simplemente complementa la info del evento */
+.modal-evento-fallback {
+  color: var(--ink-light);
+  font-size: 0.85rem;
+  font-weight: 300;
+  line-height: 1.7;
+  margin-top: 6px !important;
+  margin-bottom: 0 !important;
+}
+
+/* ── Título dinámico del evento ────────────────
+   #modal-evento-titulo recibe el nombre del evento
+   vía events.js → openModal(btn)
+─────────────────────────────────────────────── */
+#modal-evento-titulo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.65rem;
+  font-weight: 300;
+  color: var(--ink);
+  line-height: 1.25;
+  margin-bottom: 10px;
+}
+
+#modal-evento-titulo em {
+  color: var(--gold);
+  font-style: italic;
+}
+
+/* ── Separador visual entre info evento y form ─ */
+.modal-form {
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+  margin-top: 20px !important;
+}
+
+/* ── Mensaje de estado: éxito / error ──────────
+   Mostrado por showModalMessage() en events.js
+   Ref: https://www.emailjs.com/docs/sdk/send/
+─────────────────────────────────────────────── */
+.modal-message {
+  padding: 12px 16px;
+  border-radius: 1px;
+  font-size: 0.82rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  line-height: 1.5;
+  margin-top: 4px;
+}
+
+/* Verde apagado literario — confirmación */
+.modal-message--success {
+  background: rgba(90, 158, 138, 0.12);
+  border: 1px solid rgba(90, 158, 138, 0.35);
+  color: #3a7a68;
+}
+
+/* Rojo apagado — error de envío */
+.modal-message--error {
+  background: rgba(184, 76, 90, 0.10);
+  border: 1px solid rgba(184, 76, 90, 0.30);
+  color: #8a3a42;
+}
+
+/* ── Botón submit — estado deshabilitado ───────
+   Se activa mientras EmailJS procesa el envío.
+   Ref: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/disabled
+─────────────────────────────────────────────── */
+#reg-submit-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* ── Select — fix color placeholder ───────────
+   El <option disabled selected> aparece en gris
+   para diferenciarlo de las opciones reales
+─────────────────────────────────────────────── */
+.modal-input option[disabled] {
+  color: rgba(42, 42, 42, 0.4);
+}
+
+.modal-input option {
+  color: var(--ink);
+  background: var(--cream);
+}
+
+/* ── Responsive modal ──────────────────────────
+   En móvil el modal ocupa casi toda la pantalla
+   Ref: https://web.dev/articles/responsive-web-design-basics
+─────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .modal-box {
+    padding: 32px 24px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  #modal-evento-titulo {
+    font-size: 1.35rem;
+  }
+
+  .modal-evento-meta {
+    font-size: 0.72rem;
+  }
+}

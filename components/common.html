@@ -1,4 +1,4 @@
-<<!-- ========== NAV ========== -->
+<!-- ========== NAV ========== -->
 <nav>
   <div class="nav-logo">
     Léolo
@@ -8,41 +8,32 @@
     <li><a href="#" onclick="showPage('page1')">Inicio</a></li>
     <li><a href="#" onclick="showPage('page2')">Eventos</a></li>
     <li><a href="#" onclick="showPage('page3')">Comunidad</a></li>
-    <li><a href="#" onclick="openModal()" class="nav-cta">Apúntate</a></li>
+    <li><a href="#" onclick="openModal(null)" class="nav-cta">Apúntate</a></li>
   </ul>
 </nav>
 
 <!-- ========== SOCIAL SIDEBAR ========== -->
 <div class="social-sidebar">
-
-  <!-- Instagram -->
   <a class="social-btn" href="https://instagram.com" target="_blank" title="Instagram">
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
       <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.334 3.608 1.308.975.975 1.246 2.242 1.308 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.334 2.633-1.308 3.608-.975.975-2.242 1.246-3.608 1.308-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.334-3.608-1.308-.975-.975-1.246-2.242-1.308-3.608C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.062-1.366.334-2.633 1.308-3.608.975-.975 2.242-1.246 3.608-1.308C8.416 2.175 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.332.014 7.052.072 5.197.157 3.355.673 2.014 2.014.673 3.355.157 5.197.072 7.052.014 8.332 0 8.741 0 12c0 3.259.014 3.668.072 4.948.085 1.855.601 3.697 1.942 5.038 1.341 1.341 3.183 1.857 5.038 1.942C8.332 23.986 8.741 24 12 24s3.668-.014 4.948-.072c1.855-.085 3.697-.601 5.038-1.942 1.341-1.341 1.857-3.183 1.942-5.038.058-1.28.072-1.689.072-4.948s-.014-3.668-.072-4.948c-.085-1.855-.601-3.697-1.942-5.038C20.645.673 18.803.157 16.948.072 15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
     </svg>
   </a>
-
-  <!-- TikTok -->
   <a class="social-btn" href="https://tiktok.com" target="_blank" title="TikTok">
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
       <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/>
     </svg>
   </a>
-
-  <!-- X / Twitter -->
   <a class="social-btn" href="https://x.com" target="_blank" title="X / Twitter">
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
       <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
     </svg>
   </a>
-
-  <!-- YouTube -->
   <a class="social-btn" href="https://youtube.com" target="_blank" title="YouTube">
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
       <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
     </svg>
   </a>
-
 </div>
 
 <!-- ========== MODAL REGISTRO ========== -->
@@ -50,33 +41,69 @@
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal()">×</button>
 
+    <!-- Info dinámica del evento seleccionado -->
     <p class="section-eyebrow">Reserva tu lugar</p>
-    <h2>Una noche<br><em>que no olvidarás</em></h2>
-    <p>Únete a la próxima velada poética de Léolo Edición.<br>Cupos limitados.</p>
+    <h2 id="modal-evento-titulo">Una noche<br><em>que no olvidarás</em></h2>
+    <p class="modal-evento-meta" id="modal-evento-fecha"></p>
+    <p class="modal-evento-meta" id="modal-evento-lugar"></p>
+    <p class="modal-evento-fallback">Únete a la próxima velada poética de Léolo Edición.<br>Cupos limitados.</p>
 
-    <div class="modal-form">
-      <input class="modal-input" type="text"  placeholder="Tu nombre" />
-      <input class="modal-input" type="email" placeholder="Tu correo electrónico" />
-      <input class="modal-input" type="text"  placeholder="Ciudad" />
-      <select class="modal-input">
+    <!-- Formulario con id y name correctos para EmailJS -->
+    <form class="modal-form" id="reg-form" novalidate>
+
+      <input
+        id="reg-nombre"
+        name="nombre"
+        class="modal-input"
+        type="text"
+        placeholder="Tu nombre completo"
+        required
+      />
+
+      <input
+        id="reg-email"
+        name="email"
+        class="modal-input"
+        type="email"
+        placeholder="Tu correo electrónico"
+        required
+      />
+
+      <input
+        id="reg-ciudad"
+        name="ciudad"
+        class="modal-input"
+        type="text"
+        placeholder="Ciudad"
+      />
+
+      <select id="reg-fuente" name="fuente" class="modal-input">
         <option value="" disabled selected>¿Cómo nos encontraste?</option>
-        <option>Instagram</option>
-        <option>TikTok</option>
-        <option>Amigo / a</option>
-        <option>Otro evento</option>
+        <option value="Instagram">Instagram</option>
+        <option value="TikTok">TikTok</option>
+        <option value="Amigo/a">Amigo / a</option>
+        <option value="Otro evento">Otro evento</option>
       </select>
-      <button class="btn-primary" onclick="confirmRegister()" style="margin-top:8px;">
-        Confirmar asistencia →
-      </button>
-    </div>
 
+      <!-- Mensaje de estado (éxito / error) -->
+      <div id="modal-message" class="modal-message" style="display:none;"></div>
+
+      <button
+        id="reg-submit-btn"
+        class="btn-primary"
+        type="submit"
+        style="margin-top:8px;"
+      >
+        Confirmar plaza →
+      </button>
+
+    </form>
   </div>
 </div>
 
 <!-- ========== FOOTER ========== -->
 <footer>
   <div class="footer-top">
-
     <div>
       <div class="footer-logo">
         Léolo
@@ -88,7 +115,6 @@
         que estás vivo."
       </p>
     </div>
-
     <div class="footer-links">
       <h4>Navegación</h4>
       <ul>
@@ -97,7 +123,6 @@
         <li><a href="#" onclick="showPage('page3')">Comunidad</a></li>
       </ul>
     </div>
-
     <div class="footer-links">
       <h4>Redes</h4>
       <ul>
@@ -107,7 +132,6 @@
         <li><a href="https://x.com"         target="_blank">X / Twitter</a></li>
       </ul>
     </div>
-
     <div class="footer-links">
       <h4>Contacto</h4>
       <ul>
@@ -116,12 +140,9 @@
         <li><a href="#">Colaboraciones</a></li>
       </ul>
     </div>
-
   </div>
-
   <div class="footer-bottom">
     <p>© 2025 Léolo Edición · Todos los derechos reservados</p>
     <p>Poesía · Emoción · Comunidad</p>
   </div>
-
 </footer>
